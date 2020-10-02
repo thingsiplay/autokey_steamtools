@@ -1,0 +1,28 @@
+{
+    "type": "script",
+    "description": "proton",
+    "store": {},
+    "modes": [
+        3
+    ],
+    "usageCount": 6,
+    "prompt": false,
+    "omitTrigger": false,
+    "showInTrayMenu": false,
+    "abbreviation": {
+        "abbreviations": [],
+        "backspace": true,
+        "ignoreCase": false,
+        "immediate": false,
+        "triggerInside": false,
+        "wordChars": "[\\w]"
+    },
+    "hotkey": {
+        "modifiers": [],
+        "hotKey": "<f6>"
+    },
+    "filter": {
+        "regex": "Steam.Steam",
+        "isRecursive": false
+    }
+}

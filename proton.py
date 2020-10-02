@@ -1,7 +1,11 @@
 """ Open ProtonDB page or show info in Steam client at games shop page.
 
+    https://github.com/thingsiplay/autokey_steamtools
+
     Python 3.6
     Autokey: 0.95
+    
+    Autokey is required: https://github.com/autokey/autokey/
     
     Only works in Steam client while games shop page is open. If script 
     is activated, it clicks with right mouse button to open menu and 
