@@ -4,21 +4,21 @@
 
     Python 3.6
     Autokey: 0.95
-    
+
     Autokey is required: https://github.com/autokey/autokey/
-    
-    Only works in Steam client while games shop page is open. If script 
-    is activated, it clicks with right mouse button to open menu and 
-    copies url to clipboard. Then script extracts id and either open 
+
+    Only works in Steam client while games shop page is open. If script
+    is activated, it clicks with right mouse button to open menu and
+    copies url to clipboard. Then script extracts id and either open
     ProtonDB page for game or displays ProtonDB information by looking
     up data from server.
-    
-    I recommend to set up a hotkey for quick access, in example 'F6'. 
+
+    I recommend to set up a hotkey for quick access, in example 'F6'.
     The ACTION_ variables defines if these actions will be executed.
-    
-    Copy the script into scripts folder of Autokey.  On my Ubuntu 
-    machine its: 
-    
+
+    Copy the script into scripts folder of Autokey.  On my Ubuntu
+    machine its:
+
         /home/tuncay/.config/autokey/data/
 """
 
@@ -58,8 +58,11 @@ def wait(sleep=0.0):
 
 
 # Backup original clipboard data
-clip_backup = clipboard.get_clipboard()
-wait(0.1)
+try:
+    clip_backup = clipboard.get_clipboard()
+except Exception:
+    clip_backup = ''
+wait(0.2)
 # Retrieve game url from menu "Copy Page URL"
 mouse.click_relative_self(0, 0, 3)  # 3=right
 wait()
@@ -75,10 +78,10 @@ keyboard.send_key('<enter>')
 wait()
 clip = None
 clip = clipboard.get_clipboard()
-wait(0.1)
+wait(0.2)
 # Proceed only if success.
 if clip and clip.startswith('https://store.steampowered.com/app'):
-    url_steam = str(clip)        
+    url_steam = str(clip)
     match = re.search('(?<=/app/)(\d+)', url_steam)
     # Proceed only, if its a shop page for game.
     if match:
@@ -93,7 +96,7 @@ if clip and clip.startswith('https://store.steampowered.com/app'):
         # Extract summary and show results in a dialog
         if ACTION_DIALOG:
             clipboard.fill_clipboard(url_proton)
-            wait(0.1)
+            wait(0.2)
             summary = ''
             try:
                 with urllib.request.urlopen(url_proton_json) as f:
@@ -130,4 +133,4 @@ if clip and clip.startswith('https://store.steampowered.com/app'):
             webbrowser.open(url_proton, new=2, autoraise=True)
 # Restore original clipboard data
 clipboard.fill_clipboard(clip_backup)
-wait(0.1)
+wait(0.2)
